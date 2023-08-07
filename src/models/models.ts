@@ -24,3 +24,10 @@ export type FormData = {
 	content: string;
 	active: boolean;
 }
+
+export type HeaderConfig = {
+	label?: string;
+	content?: JSX.Element;
+	onClick?: () => void;
+	isActive?: boolean;
+}
