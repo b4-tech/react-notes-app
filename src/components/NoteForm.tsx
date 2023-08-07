@@ -4,9 +4,8 @@ import { addNote, editNote } from '../redux/slices/notesSlice';
 import { FormData, Note } from '../models/models';
 import { useAppDispatch, useAppSelector } from '../redux/store/store';
 import { selectCategories } from '../redux/store/selectors';
-import CustomLabel from './CustomLabel';
 import { customAlphabet } from 'nanoid';
-
+import InputWithLabel from './InputWithLabel';
 
 interface NoteFormProps {
 	note?: Note;
@@ -18,7 +17,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ note, closeModal }) => {
 	const dispatch = useAppDispatch();
 	const categories = useAppSelector(selectCategories);
 	const nanoid = customAlphabet('0123456789', 10);
-
+	
 	useEffect(() => {
 		if (note) {
 			setValue('name', note.name);
@@ -46,30 +45,47 @@ const NoteForm: React.FC<NoteFormProps> = ({ note, closeModal }) => {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className='form-note'>
 			<h1 className='form-note__title'>{note ? 'Edit Note' : 'Create Note'}</h1>
-			<CustomLabel htmlFor="name" labelClass="form-note__label1">
-				Name:
-			</CustomLabel>
-			<input {...register('name', { required: true })} className='form-note__name' />
-			<CustomLabel htmlFor="category" labelClass='form-note__label2 '>
-				Category:
-			</CustomLabel>
-			<select {...register('category', { required: true })} className='form-note__select'>
-				{categories.map(category => (
-					<option key={category.id} value={category.name}>
-						{category.name}
+            
+			<InputWithLabel
+				registerOptions={{ required: true }}
+				label="Name:"
+				id="name"
+				register={register}
+			/>
+
+			<InputWithLabel
+				registerOptions={{ required: true }}
+				label="Category:"
+				id="category"
+				elementType="select"
+				register={register}
+			>
+				{categories.map(({id, name}) => (
+					<option key={id} value={name}>
+						{name}
 					</option>
 				))}
-			</select>
-			<CustomLabel htmlFor="content" labelClass='form-note__label3'>
-				Content:
-			</CustomLabel>
-			<textarea className='form-note__content' {...register('content', { required: true })} />
-			<CustomLabel htmlFor="active" labelClass='form-note__label4'>
-				Active:
-				<input className='form-note__checkbox' type="checkbox" {...register('active')} defaultChecked={true} />
-			</CustomLabel>
+			</InputWithLabel>
+
+			<InputWithLabel
+				registerOptions={{ required: true }}
+				label="Content:"
+				id="content"
+				elementType="textarea"
+				register={register}
+			/>
+
+			<InputWithLabel
+				label="Active:"
+				id="active"
+				elementType="checkbox"
+				defaultChecked={true}
+				register={register}
+			/>
+
 			<div>
-				<button className='form-note__button1' type="submit">{note ? 'Update' : 'Create'}</button>
+				<button className='form-note__button1' type="submit">{note ? 'Update' : 'Create'}
+				</button>
 				<button className='form-note__button2' type="button" onClick={() => {
 					reset();
 					closeModal();

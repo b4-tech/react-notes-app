@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { archiveNote, removeNote, unarchiveNote } from '../redux/slices/notesSlice';
 import { useAppDispatch, useAppSelector } from '../redux/store/store';
 
@@ -8,12 +9,10 @@ import deleteIcon from '../assets/delete.svg';
 import archiveIcon from '../assets/archive.svg';
 import unarchiveIcon from '../assets/unarchive.svg';
 import { selectNotesToDisplay, selectCategories } from '../redux/store/selectors';
-import { useState } from 'react';
 import { HeaderConfig } from '../models/models';
 import GenericTable from './GenericTable';
 
 const NotesTable = () => {
-
 	const notesToDisplay = useAppSelector(selectNotesToDisplay);
 	const categories = useAppSelector(selectCategories);
 	const dispatch = useAppDispatch();
@@ -24,13 +23,12 @@ const NotesTable = () => {
 	const [expandedNotes, setExpandedNotes] = useState<number[]>([]);
 
 	const handleContentClick = (noteId: number) => {
-		if (expandedNotes.includes(noteId)) {
-			setExpandedNotes(prevNotes => prevNotes.filter(id => id !== noteId));
-		} else {
-			setExpandedNotes(prevNotes => [...prevNotes, noteId]);
-		}
+		setExpandedNotes(prevNotes => 
+			prevNotes.includes(noteId) 
+			? prevNotes.filter(id => id !== noteId) 
+			: [...prevNotes, noteId]
+		);
 	};
-
 
 	const headersConfig: HeaderConfig[] = [
 		{ label: '' },
@@ -44,25 +42,30 @@ const NotesTable = () => {
 		{ content: <img src={deleteIcon} alt='delete' className='item__ico' /> }
 	];
 
+	const findCategoryById = (id: number) => {
+        return categories.find(cat => cat.id === id);
+    };
 
 	return (
 		<GenericTable headers={headersConfig} rowClassName={'notes-header'}>
 			{notesToDisplay.map((note) => {
-				const category = categories.find((cat) => cat.id === note.category);
-				const dates = (note.content.match(datesRegex) || []).join(", ");
-				const isExpanded = expandedNotes.includes(note.id);
-				const shouldShorten = note.content.length > 5 && !isExpanded;
+				const {category, id, content,created, name, active} = note
+
+				const noteCategory = findCategoryById(category);
+				const dates = (content.match(datesRegex) || []).join(", ");
+				const isExpanded = expandedNotes.includes(id);
+				const shouldShorten = content.length > 5 && !isExpanded;
 				return (
-					<tr className='item' key={note.id}>
+					<tr className='item' key={id}>
 						<td >
-							{category && <img className='item__ico' src={category.iconPath} alt={category.name} style={{ marginRight: '5px' }} />}
+							{noteCategory && <img className='item__ico' src={noteCategory.iconPath} alt={noteCategory.name} style={{ marginRight: '5px' }} />}
 						</td>
 						<td >
-							{note.name}
+							{name}
 						</td>
-						<td>{note.created}</td>
-						<td>{category ? category.name : ''}</td>
-						<td onClick={() => handleContentClick(note.id)}
+						<td>{created}</td>
+						<td>{noteCategory ? noteCategory.name : ''}</td>
+						<td onClick={() => handleContentClick(id)}
 							style={{
 								maxWidth: '120px',
 								overflow: 'hidden',
@@ -70,21 +73,21 @@ const NotesTable = () => {
 								whiteSpace: isExpanded ? 'normal' : 'nowrap',
 								cursor: 'pointer'
 							}}
-							title={note.content}
+							title={content}
 						>
-							{note.content}
+							{content}
 						</td>
 						<td>{dates}</td>
 						<td>
 							<NoteModalButton note={note} />
 						</td>
 						<td>
-							<div onClick={() => note.active ? dispatch(archiveNote(note.id)) : dispatch(unarchiveNote(note.id))}>
-								<img src={note.active ? archiveIcon : unarchiveIcon} alt="Archive" className='item__ico' />
+							<div onClick={() => active ? dispatch(archiveNote(id)) : dispatch(unarchiveNote(id))}>
+								<img src={active ? archiveIcon : unarchiveIcon} alt="Archive" className='item__ico' />
 							</div>
 						</td>
 						<td>
-							<div onClick={() => dispatch(removeNote(note.id))}>
+							<div onClick={() => dispatch(removeNote(id))}>
 								<img src={deleteIcon} alt="Delete" className='item__ico' />
 							</div>
 						</td>

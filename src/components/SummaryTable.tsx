@@ -25,18 +25,17 @@ const SummaryTable = () => {
 	];
 
 	return (
-
-		<GenericTable headers={headersConfig} rowClassName={'categories-header'}>
-			{summary.map(row => (
-				<tr key={row.id} className='item2'>
-					<td><img className='item__ico' src={row.iconPath} alt={`${row.name} icon`} /></td>
-					<td>{row.name}</td>
-					<td>{row.active}</td>
-					<td>{row.archived}</td>
+		<GenericTable headers={headersConfig} rowClassName='categories-header'>
+			{summary.map(({ id, iconPath, name, active, archived }) => (
+				<tr key={id} className='item2'>
+					<td><img className='item__ico' src={iconPath} alt={`${name} icon`} /></td>
+					<td>{name}</td>
+					<td>{active}</td>
+					<td>{archived}</td>
 				</tr>
 			))}
-		</GenericTable >
-	)
+		</GenericTable>
+	);
 }
 
 export default SummaryTable;
