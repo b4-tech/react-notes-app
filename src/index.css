@@ -1,299 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-  padding: 0;
-  margin: 0;
-  font-size: 1vw;
+  @apply text-[1vw] m-0 p-0;
 }
-
 .container {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  min-width: 285px;
-  width: 80%;
-  margin: 0 auto;
+  @apply flex flex-col overflow-hidden min-w-[285px] w-4/5 mx-auto my-0;
 }
-
-
 .notes-header {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 15% 0% 26% 5% 28% 14% 4% 4% 4%;
-  color: white;
-  grid-template-rows: 2vw;
-  margin: 2vw auto 1vw auto;
-  align-items: center;
-  background-color: rgb(199, 199, 199);
+  @apply w-full grid grid-cols-[15%_0%_26%_5%_28%_14%_4%_4%_4%] text-[white] grid-rows-[2vw] items-center bg-[rgb(199,199,199)] mt-[2vw] mb-[1vw] mx-auto;
 }
-
 .notes-header__archive-btn {
-  justify-self: center;
-  border: none;
+  @apply justify-self-center bg-transparent text-white border-[none];
   outline: none;
-  background-color: transparent;
-  color: #ffffff;
 }
-
 .notes-header__archive-btn i {
-  font-size: 1.5vw;
+  @apply text-[1.5vw];
 }
-
 .notes-header__delete-btn {
-  justify-self: center;
-  border: none;
+  @apply justify-self-center bg-transparent text-white border-[none];
   outline: none;
-  background-color: transparent;
-  color: #ffffff;
 }
-
 .notes-header__delete-btn i {
-  font-size: 1.5vw;
+  @apply text-[1.5vw];
 }
-
 .item {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 7% 20% 15% 15% 15% 16% 4% 4% 4%;
-  margin: 0 auto 1vw auto;
-  align-items: center;
-  background-color: rgb(238, 235, 248);
-  min-height: 4vw;
-  padding: 0.2vw 0;
+  @apply w-full grid grid-cols-[7%_20%_15%_15%_15%_16%_4%_4%_4%] items-center bg-[rgb(238,235,248)] min-h-[4vw] mt-0 mb-[1vw] mx-auto px-0 py-[0.2vw];
 }
-
 .item__ico {
-  padding-left: 15px;
-  max-width: 1.5vw;
+  @apply max-w-[2.5vw] pl-[15px];
 }
-
 .item__created {
-  color: rgb(79, 78, 78);
+  @apply text-[rgb(79,78,78)];
 }
-
 .item__category {
-  color: rgb(79, 78, 78);
+  @apply text-[rgb(79,78,78)];
 }
-
 .item__content {
-  color: rgb(79, 78, 78);
+  @apply text-[rgb(79,78,78)] hover:underline hover:cursor-pointer;
   word-wrap: break-word;
 }
-
-.item__content:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .item__dates {
-  color: rgb(79, 78, 78);
+  @apply text-[rgb(79,78,78)];
 }
-
 .item__edit {
-  color: rgb(79, 78, 78);
-  justify-self: center;
-  cursor: pointer;
-  border: none;
+  @apply text-[rgb(79,78,78)] justify-self-center cursor-pointer bg-transparent p-0 border-[none];
   outline: none;
-  background-color: transparent;
-  padding: 0;
 }
-
 .item__edit i {
-  font-size: 1.8vw;
+  @apply text-[1.8vw] hover:text-[orange];
 }
-
-.item__edit i:hover {
-  color: orange;
-}
-
 .item__active {
-  color: rgb(79, 78, 78);
-  justify-self: center;
-  cursor: pointer;
-  border: none;
+  @apply text-[rgb(79,78,78)] justify-self-center cursor-pointer bg-transparent p-0 border-[none];
   outline: none;
-  background-color: transparent;
-  padding: 0;
 }
-
 .item__delete {
-  color: rgb(79, 78, 78);
-  justify-self: center;
-  cursor: pointer;
-  border: none;
+  @apply text-[rgb(79,78,78)] justify-self-center cursor-pointer bg-transparent p-0 border-[none];
   outline: none;
-  background-color: transparent;
-  padding: 0;
 }
-
 .item__delete i {
-  font-size: 1.8vw;
+  @apply text-[1.8vw];
 }
-
 .item__delete:hover i {
-  color: red;
+  @apply text-[red];
 }
-
 .item__active i {
-  font-size: 1.8vw;
+  @apply text-[1.8vw] hover:text-[blue];
 }
-
-.item__active i:hover {
-  color: blue;
-}
-
 .create-note-btn {
-  width: 7vw;
-  align-self: flex-end;
-  font-size: 1vw;
-  align-self: flex-end
+  @apply w-[7vw] self-end text-[1vw];
 }
-
 .categories-header {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 7% 33% 30% 30%;
-  color: white;
-  grid-template-rows: 2vw;
-  margin: 2vw auto 1vw auto;
-  align-items: center;
-  background-color: rgb(199, 199, 199);
+  @apply w-full grid grid-cols-[7%_33%_30%_30%] text-[white] grid-rows-[2vw] items-center bg-[rgb(199,199,199)] mt-[2vw] mb-[1vw] mx-auto;
 }
-
 .item2 {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 7% 33% 30% 30%;
-  grid-template-rows: 4vw;
-  margin: 0 auto 1vw auto;
-  align-items: center;
-  background-color: rgb(238, 235, 248);
+  @apply w-full grid grid-cols-[7%_33%_30%_30%] grid-rows-[4vw] items-center bg-[rgb(238,235,248)] mt-0 mb-[1vw] mx-auto;
 }
-
 .item2__ico {
-  justify-self: center;
-  color: rgb(79, 78, 78);
+  @apply justify-self-center text-[rgb(79,78,78)];
 }
-
 .item2__ico i {
-  font-size: 2vw;
+  @apply text-[2vw];
 }
-
 .item2__active {
-  color: rgb(79, 78, 78);
+  @apply text-[rgb(79,78,78)];
 }
-
 .item2__archived {
-  color: rgb(79, 78, 78);
+  @apply text-[rgb(79,78,78)];
 }
-
 .emply {
-  color: rgb(79, 78, 78);
-  align-self: center;
+  @apply text-[rgb(79,78,78)] self-center;
 }
-
 .categories-header__active {
-  cursor: pointer;
+  @apply cursor-pointer hover:underline;
 }
-
-.categories-header__active:hover {
-  text-decoration: underline;
-}
-
 .categories-header__archived {
-  cursor: pointer;
+  @apply cursor-pointer hover:underline;
 }
-
-.categories-header__archived:hover {
-  text-decoration: underline;
-}
-
 .active {
-  text-decoration: underline;
+  @apply underline;
 }
-
-/* done*/
 
 .form-note {
-  width: 40vw;
-  margin: 1vw auto;
-  box-shadow: 0.2vw 0.2vw 0.5vw #aaa;
-  padding: 10px;
-  display: grid;
-  font-size: 17px;
-  background-color: rgb(238, 235, 248);
+  @apply w-[40vw] shadow-[0.2vw_0.2vw_0.5vw_#aaa] grid text-[17px] bg-[rgb(238,235,248)] mx-auto my-[1vw] p-2.5;
 }
-
 .form-note__title {
-  text-align: center;
-  font-size: 27px;
+  @apply text-center text-[27px];
 }
-
 .form-note__label1 {
-  min-width: 30%;
-  margin-bottom: 10px;
+  @apply min-w-[30%] mb-2.5;
 }
-
 .form-note__name {
-  width: 65%;
-  border: none;
-  border-bottom: 1px solid black;
-  font-size: 15px;
-  margin-bottom: 10px;
-  background-color: rgb(238, 235, 248);
+  @apply w-[65%] text-[15px] bg-[rgb(238,235,248)] mb-2.5 border-b-[black] border-[none] border-b border-solid;
 }
-
 .form-note__name:focus {
   outline: none !important;
 }
-
 .form-note__label2 {
-  min-width: 30%;
-  margin-bottom: 10px;
+  @apply min-w-[30%] mb-2.5;
 }
-
 .form-note__select {
-  width: 66%;
-  height: 30px;
-  font-size: 15px;
-  margin-bottom: 10px;
+  @apply w-[66%] h-[30px] text-[15px] mb-2.5;
 }
-
 .form-note__label3 {
-  margin-bottom: 5px;
+  @apply mb-[5px];
 }
-
 .form-note__content {
-  max-width: 100%;
-  max-height: 100%;
-  margin-bottom: 5px;
-  resize: none;
+  @apply max-w-full max-h-full resize-none mb-[5px];
 }
-
 .form-note__checkboxdiv {
-  margin: 7px 0 15px;
+  @apply mt-[7px] mb-[15px] mx-0;
 }
-
 .form-note__checkbox {
-  display: inline-block;
+  @apply inline-block;
 }
-
 .form-note__label4 {
-  display: inline-block;
+  @apply inline-block;
 }
-
 .form-note__button1 {
-  float: left;
-  width: 100px;
-  height: 40px;
+  @apply float-left w-[100px] h-10;
 }
-
 .form-note__button2 {
-  float: right;
-  width: 100px;
-  height: 40px;
+  @apply float-right w-[100px] h-10;
 }
-
 .active-tab {
-  text-decoration: underline;
-  cursor: pointer;
+  @apply underline cursor-pointer;
 }
